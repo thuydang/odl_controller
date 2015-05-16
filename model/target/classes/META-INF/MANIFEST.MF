@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1431772147992
+Bnd-LastModified: 1431773723920
 Build-Jdk: 1.7.0_75
 Built-By: fedora
 Bundle-ManifestVersion: 2
