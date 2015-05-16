@@ -19,5 +19,6 @@
     <module>consumer</module>
     <module>web</module>
     <module>features</module>
+    <module>distribution-karaf</module>
   </modules>
 </project>
