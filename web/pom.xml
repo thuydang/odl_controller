@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+        <artifactId>ima-controller</artifactId>
+        <groupId>de.dailab.nemo.ima.controller</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+  <scm>
+    <connection>scm:git:ssh://git.opendaylight.org:29418/controller.git</connection>
+    <developerConnection>scm:git:ssh://git.opendaylight.org:29418/controller.git</developerConnection>
+    <url>https://wiki.opendaylight.org/view/OpenDaylight_Controller:Main</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <artifactId>ima-controller-web</artifactId>
+  <packaging>bundle</packaging>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>${bundle.plugin.version}</version>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+          <Import-Package>*</Import-Package>
+            <Export-Package>org.opendaylight.controller.app.web</Export-Package>
+              <Bundle-Activator>org.opendaylight.controller.app.web.Activator</Bundle-Activator>
+          </instructions>
+          <manifestLocation>${project.basedir}/src/main/resources/META-INF</manifestLocation>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+      <dependency>
+          <groupId>org.osgi</groupId>
+          <artifactId>org.osgi.compendium</artifactId>
+          <version>${osgi.compendium.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.osgi</groupId>
+          <artifactId>org.osgi.core</artifactId>
+          <version>${osgi.core.version}</version>
+      </dependency>
+        </dependencies>
+  </project>

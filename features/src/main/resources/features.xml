@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<features name="task-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.0 http://karaf.apache.org/xmlns/features/v1.2.0">
+
+    <feature name='odl-task-provider' version='${project.version}'>
+        <feature version='${yangtools.version}'>odl-yangtools-common</feature>
+        <feature version='${yangtools.version}'>odl-yangtools-binding</feature>
+        <feature version='${mdsal.version}'>odl-mdsal-broker</feature>
+        <bundle>mvn:de.dailab.nemo.ima.controller/${artifactName}-model/${project.version}</bundle>
+        <bundle>mvn:de.dailab.nemo.ima.controller/${artifactName}-provider/${project.version}</bundle>
+        <configfile finalname="${config.configfile.directory}/05-task-provider-config.xml">mvn:de.dailab.nemo.ima.controller/${artifactName}-provider/${project.version}/xml/config</configfile>
+    </feature>
+    <feature name='odl-task-consumer' version='${project.version}'>
+        <feature>odl-task-provider</feature>
+        <bundle>mvn:de.dailab.nemo.ima.controller/${artifactName}-consumer/${project.version}</bundle>
+        <configfile finalname="${config.configfile.directory}/06-task-consumer-config.xml">mvn:de.dailab.nemo.ima.controller/${artifactName}-consumer/${project.version}/xml/config</configfile>
+    </feature>
+    <feature name='odl-task-web' version='${project.version}'>
+        <feature>http</feature>
+        <feature>odl-task-provider</feature>
+        <feature version='${mdsal.version}'>odl-restconf-noauth</feature>
+        <bundle>mvn:de.dailab.nemo.ima.controller/${artifactName}-web/${project.version}</bundle>
+    </feature>
+</features>

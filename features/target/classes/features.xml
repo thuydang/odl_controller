@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<features name="task-1.0.0-SNAPSHOT" xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.0 http://karaf.apache.org/xmlns/features/v1.2.0">
+
+    <feature name='odl-task-provider' version='1.0.0-SNAPSHOT'>
+        <feature version='0.7.0-SNAPSHOT'>odl-yangtools-common</feature>
+        <feature version='0.7.0-SNAPSHOT'>odl-yangtools-binding</feature>
+        <feature version='1.2.0-SNAPSHOT'>odl-mdsal-broker</feature>
+        <bundle>mvn:de.dailab.nemo.ima.controller/ima-controller-model/1.0.0-SNAPSHOT</bundle>
+        <bundle>mvn:de.dailab.nemo.ima.controller/ima-controller-provider/1.0.0-SNAPSHOT</bundle>
+        <configfile finalname="etc/opendaylight/karaf/05-task-provider-config.xml">mvn:de.dailab.nemo.ima.controller/ima-controller-provider/1.0.0-SNAPSHOT/xml/config</configfile>
+    </feature>
+    <feature name='odl-task-consumer' version='1.0.0-SNAPSHOT'>
+        <feature>odl-task-provider</feature>
+        <bundle>mvn:de.dailab.nemo.ima.controller/ima-controller-consumer/1.0.0-SNAPSHOT</bundle>
+        <configfile finalname="etc/opendaylight/karaf/06-task-consumer-config.xml">mvn:de.dailab.nemo.ima.controller/ima-controller-consumer/1.0.0-SNAPSHOT/xml/config</configfile>
+    </feature>
+    <feature name='odl-task-web' version='1.0.0-SNAPSHOT'>
+        <feature>http</feature>
+        <feature>odl-task-provider</feature>
+        <feature version='1.2.0-SNAPSHOT'>odl-restconf-noauth</feature>
+        <bundle>mvn:de.dailab.nemo.ima.controller/ima-controller-web/1.0.0-SNAPSHOT</bundle>
+    </feature>
+</features>
