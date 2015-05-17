@@ -1,48 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <artifactId>ima-controller</artifactId>
-        <groupId>de.dailab.nemo.ima.controller</groupId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
-    <artifactId>features-ima-controller</artifactId>
-    <packaging>jar</packaging>
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>de.dailab.nemo.ima.controller</groupId>
+		<artifactId>commons</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../commons/parent</relativePath>
+	</parent>
+	<artifactId>features-ima-controller</artifactId>
+	<packaging>jar</packaging>
+	<description> <!-- Provide a Description it will be visible in the shell CLI--> </description>
 
-    <properties>
-        <features.file>features.xml</features.file>
-        <artifactName>ima-controller</artifactName>
-    </properties>
+	<properties>
+		<features.file>features.xml</features.file>
+		<artifactName>ima-controller</artifactName>
+	</properties>
 
   <dependencies>
-      <dependency>
-          <groupId>de.dailab.nemo.ima.controller</groupId>
-          <artifactId>ima-controller-provider</artifactId>
-          <version>${project.version}</version>
-      </dependency>
-      <dependency>
-          <groupId>de.dailab.nemo.ima.controller</groupId>
-          <artifactId>ima-controller-provider</artifactId>
-          <version>${project.version}</version>
-          <type>xml</type>
-          <classifier>config</classifier>
-      </dependency>
-      <dependency>
-          <groupId>de.dailab.nemo.ima.controller</groupId>
-          <artifactId>ima-controller-consumer</artifactId>
-          <version>${project.version}</version>
-      </dependency>
-      <dependency>
-          <groupId>de.dailab.nemo.ima.controller</groupId>
-          <artifactId>ima-controller-consumer</artifactId>
-          <version>${project.version}</version>
-          <type>xml</type>
-          <classifier>config</classifier>
-      </dependency>
-  </dependencies>
 
-  <build>
-    <resources>
+
+		<!-- Features Repo Dependency-->
+		<dependency>
+			<groupId>org.opendaylight.openflowplugin</groupId>
+			<artifactId>features-openflowplugin</artifactId>
+			<classifier>features</classifier>
+			<type>xml</type>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.controller</groupId>
+			<artifactId>features-mdsal</artifactId>
+			<classifier>features</classifier>
+			<type>xml</type>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.controller</groupId>
+			<artifactId>features-restconf</artifactId>
+			<classifier>features</classifier>
+			<type>xml</type>
+		</dependency>
+		<dependency>
+			<groupId>org.opendaylight.dlux</groupId>
+			<artifactId>features-dlux</artifactId>
+			<version>${dlux.version}</version>
+			<classifier>features</classifier>
+			<type>xml</type>
+		</dependency>
+
+		<!-- Directly references Features -->
+		<dependency>
+			<groupId>de.dailab.nemo.ima.controller</groupId>
+			<artifactId>ima-controller-main</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>de.dailab.nemo.ima.controller</groupId>
+			<artifactId>ima-controller-main</artifactId>
+			<version>${project.version}</version>
+			<type>xml</type>
+			<classifier>config</classifier>
+      </dependency>
+      <dependency>
+          <groupId>de.dailab.nemo.ima.controller</groupId>
+          <artifactId>ima-controller-consumer</artifactId>
+          <version>${project.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>de.dailab.nemo.ima.controller</groupId>
+          <artifactId>ima-controller-consumer</artifactId>
+          <version>${project.version}</version>
+          <type>xml</type>
+          <classifier>config</classifier>
+				</dependency>
+
+				<!-- test to validate features.xml -->
+				<dependency>
+					<groupId>org.opendaylight.odlparent</groupId>
+					<artifactId>features-test</artifactId>
+					<version>1.5.0-SNAPSHOT</version>
+				</dependency>
+				<!-- dependency for opendaylight-karaf-empty for use by testing -->
+				<dependency>
+					<groupId>org.opendaylight.controller</groupId>
+					<artifactId>opendaylight-karaf-empty</artifactId>
+					<version>1.5.0-SNAPSHOT</version>
+					<type>zip</type>
+				</dependency>
+
+			</dependencies>
+
+			<build>
+				<resources>
       <resource>
         <filtering>true</filtering>
         <directory>src/main/resources</directory>
@@ -83,7 +130,23 @@
             </configuration>
           </execution>
         </executions>
-      </plugin>
-    </plugins>
-  </build>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.16</version>
+				<configuration>
+					<systemPropertyVariables>
+						<karaf.distro.groupId>org.opendaylight.controller</karaf.distro.groupId>
+						<karaf.distro.artifactId>opendaylight-karaf-empty</karaf.distro.artifactId>
+						<karaf.distro.version>1.5.0-SNAPSHOT</karaf.distro.version>
+					</systemPropertyVariables>
+					<dependenciesToScan>
+						<dependency>org.opendaylight.odlparent:features-test</dependency>
+					</dependenciesToScan>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
 </project>

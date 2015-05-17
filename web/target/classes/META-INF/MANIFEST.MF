@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1431772221999
+Bnd-LastModified: 1431800736588
 Build-Jdk: 1.7.0_75
 Built-By: fedora
 Bundle-Activator: org.opendaylight.controller.app.web.Activator
@@ -13,4 +13,5 @@ Export-Package: org.opendaylight.controller.app.web;uses:="org.osgi.util
  HOT"
 Import-Package: org.osgi.framework;version="[1.7,2)",org.osgi.service.ht
  tp;version="[1.2,2)",org.osgi.util.tracker;version="[1.5,2)"
+Originally-Created-By: Apache Maven Bundle Plugin
 Tool: Bnd-1.50.0

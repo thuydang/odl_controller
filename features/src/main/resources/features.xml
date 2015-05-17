@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<features name="task-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
+<features name="features-ima-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.0 http://karaf.apache.org/xmlns/features/v1.2.0">
+  <repository>mvn:org.opendaylight.openflowplugin/features-openflowplugin/${openflow.plugin.version}/xml/features</repository>
+  <repository>mvn:org.opendaylight.controller/features-restconf/${mdsal.version}/xml/features</repository>
+  <repository>mvn:org.opendaylight.dlux/features-dlux/${dlux.version}/xml/features</repository>
 
+  <feature name='ima-controller-all' description="IMA :: Controller :: All" version='${project.version}'>
+    <feature version="${project.version}">ima-controller</feature>
+  </feature>
+
+  <feature name='ima-controller' description="IMA :: Controller :: Main" version='${project.version}'>
+		<feature version='${yangtools.version}'>odl-yangtools-common</feature>
+		<feature version='${yangtools.version}'>odl-yangtools-binding</feature>
+		<feature version='${mdsal.version}'>odl-mdsal-broker</feature>
+		<bundle>mvn:de.dailab.nemo.ima.controller/${artifactName}-model/${project.version}</bundle>
+		<bundle>mvn:de.dailab.nemo.ima.controller/ima-controller-main/${project.version}</bundle>
+    <configfile finalname="${config.configfile.directory}/${config.controller-main.configfile}">mvn:de.dailab.nemo.ima.controller/ima-controller-main/${project.version}/xml/config</configfile>
+  </feature>
+	<!--
     <feature name='odl-task-provider' version='${project.version}'>
         <feature version='${yangtools.version}'>odl-yangtools-common</feature>
         <feature version='${yangtools.version}'>odl-yangtools-binding</feature>
@@ -12,14 +28,15 @@
         <bundle>mvn:de.dailab.nemo.ima.controller/${artifactName}-provider/${project.version}</bundle>
         <configfile finalname="${config.configfile.directory}/05-task-provider-config.xml">mvn:de.dailab.nemo.ima.controller/${artifactName}-provider/${project.version}/xml/config</configfile>
     </feature>
+		-->
     <feature name='odl-task-consumer' version='${project.version}'>
-        <feature>odl-task-provider</feature>
+        <feature>ima-controller</feature>
         <bundle>mvn:de.dailab.nemo.ima.controller/${artifactName}-consumer/${project.version}</bundle>
         <configfile finalname="${config.configfile.directory}/06-task-consumer-config.xml">mvn:de.dailab.nemo.ima.controller/${artifactName}-consumer/${project.version}/xml/config</configfile>
     </feature>
     <feature name='odl-task-web' version='${project.version}'>
         <feature>http</feature>
-        <feature>odl-task-provider</feature>
+        <feature>ima-controller</feature>
         <feature version='${mdsal.version}'>odl-restconf-noauth</feature>
         <bundle>mvn:de.dailab.nemo.ima.controller/${artifactName}-web/${project.version}</bundle>
     </feature>
