@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>de.dailab.nemo.ima.controller</groupId>
-		<artifactId>commons</artifactId>
+		<artifactId>ima-commons</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 		<relativePath>../commons/parent</relativePath>
 	</parent>

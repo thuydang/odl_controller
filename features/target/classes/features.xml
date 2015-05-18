@@ -15,6 +15,8 @@
 		<feature version='0.7.0-SNAPSHOT'>odl-yangtools-common</feature>
 		<feature version='0.7.0-SNAPSHOT'>odl-yangtools-binding</feature>
 		<feature version='1.2.0-SNAPSHOT'>odl-mdsal-broker</feature>
+		<feature version="0.1.0-SNAPSHOT">odl-openflowplugin-flow-services</feature>
+		<feature version="0.1.0-SNAPSHOT">odl-openflowplugin-southbound</feature>
 		<bundle>mvn:de.dailab.nemo.ima.controller/ima-controller-model/1.0.0-SNAPSHOT</bundle>
 		<bundle>mvn:de.dailab.nemo.ima.controller/ima-controller-main/1.0.0-SNAPSHOT</bundle>
     <configfile finalname="etc/opendaylight/karaf/58-controllermain.xml">mvn:de.dailab.nemo.ima.controller/ima-controller-main/1.0.0-SNAPSHOT/xml/config</configfile>

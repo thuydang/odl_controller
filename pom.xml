@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>de.dailab.nemo.ima.controller</groupId>
-		<artifactId>commons</artifactId>
+		<artifactId>ima-commons</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 		<relativePath>commons/parent</relativePath>
 	</parent>
@@ -13,14 +13,15 @@
   <artifactId>ima-controller</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
-    <modules>
-			<module>commons/parent</module>
+	<modules>
+		<module>commons/parent</module>
 
-    <module>model</module>
-    <module>controller-main</module>
-    <module>consumer</module>
+		<module>model</module>
+		<module>controller-main</module>
+		<module>consumer</module>
     <module>web</module>
     <module>features</module>
+
 		<!--
     <module>distribution-karaf</module>
 		-->

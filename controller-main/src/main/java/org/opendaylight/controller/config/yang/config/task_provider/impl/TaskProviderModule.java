@@ -1,6 +1,6 @@
 package org.opendaylight.controller.config.yang.config.task_provider.impl;
 
-import de.dailab.nemo.ima.controller.provider.TaskProvider;
+import de.dailab.nemo.ima.controller.app.ImaController;
 import org.opendaylight.controller.config.spi.Module;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker;
@@ -28,19 +28,25 @@ public class TaskProviderModule extends org.opendaylight.controller.config.yang.
 
     @Override
     public AutoCloseable createInstance() {
-        final TaskProvider appProvider = new TaskProvider();
+        final ImaController appProvider = new ImaController();
 
         DataBroker dataBrokerService = getDataBrokerDependency();
         appProvider.setDataService(dataBrokerService);
 
         RpcProviderRegistry rpcRegistryDependency = getRpcRegistryDependency();
+				appProvider.setRpcProviderRegistry(rpcRegistryDependency);
+				// As provider registration:
         final BindingAwareBroker.RpcRegistration<TaskService> rpcRegistration =
                                 rpcRegistryDependency
                                     .addRpcImplementation(TaskService.class, appProvider);
+				// Get services to consume from registry:
+        //TaskService service = getRpcRegistryDependency().getRpcService(TaskService.class);
 
         //retrieves the notification service for publishing notifications
         NotificationProviderService notificationService = getNotificationServiceDependency();
+				appProvider.setNotificationProviderService(notificationService);
 
+				appProvider.start();
 
         // Wrap toaster as AutoCloseable and close registrations to md-sal at
         // close()
@@ -48,14 +54,14 @@ public class TaskProviderModule extends org.opendaylight.controller.config.yang.
 
             @Override
             public void close() throws Exception {
-                rpcRegistration.close();
+                //rpcRegistration.close();
                 appProvider.close();
-                log.info("TaskProvider (instance {}) torn down.", this);
+                log.info("ImaController (instance {}) torn down.", this);
             }
         }
 
         AutoCloseable ret = new CloseResources();
-        log.info("TaskProvider (instance {}) initialized.", ret);
+        log.info("ImaController (instance {}) initialized.", ret);
         return ret;
     }
 
