@@ -70,8 +70,10 @@ public interface SwitchManager {
      * inject {@link PacketProcessingService}
      *
      * @param packetProcessingService
+     */
     void setSalFlowService(
             SalFlowService salFlowService);
-     */
+
+	void setFlowWriterService(FlowWriterService flowWriterService);
 
 }

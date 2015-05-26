@@ -1,7 +1,13 @@
 package de.dailab.nemo.ima.controller.app;
 
-
-//import de.dailab.nemo.ima.controller.app.FlowManager;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev100924.MacAddress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.address.tracker.rev140617.address.node.connector.Addresses;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.flow.service.rev130819.SalFlowService;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.inventory.rev130819.node.NodeConnector;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.inventory.rev130819.nodes.Node;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.inventory.rev130819.NodeConnectorId;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.inventory.rev130819.NodeId;
+import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 
 /**
  *
@@ -18,8 +24,10 @@ public interface FlowManager {
 	 *
 	 * @param data
 	 */
-	//void setFlowWriter();
+	void setSalFlowService(SalFlowService salFlowService);
 	
+	void setFlowWriterService(FlowWriterService flowWriterService);
+
 	/**
 	 * Add default rules for a new switch. 
 	 * <p/>
@@ -31,7 +39,12 @@ public interface FlowManager {
 	 *
 	 * @param data
 	 */
-	void addInitialFlows();
+	void addInitialFlows(InstanceIdentifier<Node> nodeId);
+
+	void writeForwardToMacFlow(Node node, NodeConnector nodeConnector,
+			Addresses addrs);
+
+	void writeForwardToMacFlow(NodeId nodeId, NodeConnectorId nodeConnectorId, MacAddress aMac);
 	
 
 }

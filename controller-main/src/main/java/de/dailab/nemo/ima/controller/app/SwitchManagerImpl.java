@@ -40,6 +40,9 @@ import de.dailab.nemo.ima.controller.app.flow.ReactiveFlowWriter;
  */
 
 import de.dailab.nemo.ima.controller.app.SwitchManager;
+import de.dailab.nemo.ima.controller.app.FlowWriterServiceImpl;
+import de.dailab.nemo.ima.controller.app.FlowWriterService;
+import de.dailab.nemo.ima.controller.app.HostMobilityEventListenerImpl;
 
 /**
  * NOOP. Listens to packetIn notification and
@@ -57,8 +60,11 @@ public class SwitchManagerImpl implements SwitchManager {
 
 	private NotificationService notificationService;
 	private DataBroker dataBroker;
-	//private SalFlowService salFlowService;
 	private PacketProcessingService packetProcessingService;
+	private SalFlowService salFlowService;
+	private FlowWriterService flowWriterService;
+
+	private SwitchHandlerFacadeImpl switchHandler;
 
 	private Registration packetInRegistration;
 	private Registration inventoryListenerReg = null; 
@@ -94,12 +100,21 @@ public class SwitchManagerImpl implements SwitchManager {
 
 	/**
 	 * @param salFlowService the salFlowService to set
+	 */
     @Override
     public void setSalFlowService(
             SalFlowService salFlowService) {
         this.salFlowService = salFlowService;
     }
+
+	/**
+	 * @param flowWriterService the salFlowService to set
 	 */
+    @Override
+    public void setFlowWriterService(
+            FlowWriterService flowWriterService) {
+        this.flowWriterService = flowWriterService;
+    }
 
 
 	/**
@@ -109,15 +124,32 @@ public class SwitchManagerImpl implements SwitchManager {
 	public void start() {
 		LOG.debug("start() -->");
 
+		switchHandler = new SwitchHandlerFacadeImpl();
+		// Services dependancy
+		switchHandler.setPacketProcessingService(packetProcessingService);
+
+        FlowManager flowManager = new FlowManagerImpl();
+        flowManager.setSalFlowService(salFlowService);
+        flowManager.setFlowWriterService(flowWriterService);
+        switchHandler.setFlowManager(flowManager);
+
+		switchHandler.setFlowWriterService(flowWriterService);
+		switchHandler.setSalFlowService(salFlowService);
+
+		// Event listeners holder
 		PacketInDispatcherImpl packetInDispatcher = new PacketInDispatcherImpl();
 		NodeEventDispatcherImpl nodeEventDispatcher = new NodeEventDispatcherImpl();
+		HostMobilityEventListenerImpl hostMobilityEventListener = 
+			new HostMobilityEventListenerImpl(dataBroker);
 
-		SwitchHandlerFacadeImpl switchHandler = new SwitchHandlerFacadeImpl();
-		switchHandler.setPacketProcessingService(packetProcessingService);
 		switchHandler.setPacketInDispatcher(packetInDispatcher);
-		switchHandler.setNodeEventDispatcher(nodeEventDispatcher);
+        packetInRegistration = notificationService.registerNotificationListener(packetInDispatcher);
 
-		// Listen to Node Event
+		switchHandler.setNodeEventDispatcher(nodeEventDispatcher);
+		switchHandler.setHostMobilityEventListener(hostMobilityEventListener);
+		hostMobilityEventListener.registerAsDataChangeListener();
+
+		// Listen to Node Appeared Event
 		NodeListener nodeListener = new NodeListener();
 		nodeListener.setSwitchHandler(switchHandler); 
 		inventoryListenerReg = notificationService.registerNotificationListener(nodeListener);
@@ -183,6 +215,15 @@ public class SwitchManagerImpl implements SwitchManager {
 		} catch (Exception e) {
 			LOG.error("Error unregistering inventory listener. Exception:", e);
 		}
+
+        try {
+            //packetInRegistration.close();
+
+        } catch (Exception e) {
+            LOG.error("Error unregistering packet in listener. Exception:", e);
+        }
+
+		switchHandler.stop();
 		/*
 				try {
 					if(reactFlowWriterReg != null) {
@@ -194,19 +235,13 @@ public class SwitchManagerImpl implements SwitchManager {
 
 
         try {
-            //packetInRegistration.close();
-
-        } catch (Exception e) {
-            LOG.error("Error unregistering packet in listener. Exception:", e);
-        }
-        try {
             //dataChangeListenerRegistration.close();
         } catch (Exception e) {
             LOG.error("Error unregistering data change listener. Exception:", e);
         }
 		 */
 
-		LOG.info("DmmSwitchManager (instance {}) torn down.", this);                                 
+		LOG.info("SwitchManager (instance {}) torn down.", this);                                 
 		LOG.debug("stop() <--");
 	}
 

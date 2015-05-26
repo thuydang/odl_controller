@@ -17,6 +17,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
+
+import org.opendaylight.yang.gen.v1.urn.opendaylight.address.tracker.rev140617.address.node.connector.Addresses;
 /*
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev100924.MacAddress;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.flow.inventory.rev130819.FlowId;
@@ -53,7 +55,7 @@ import de.dailab.nemo.ima.controller.app.SwitchHandler;
  *
  *
  */
-public class SwitchHandlerImpl implements SwitchHandler, OpendaylightInventoryListener {
+public class SwitchHandlerImpl implements SwitchHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(SwitchHandlerImpl.class);
 
@@ -64,28 +66,27 @@ public class SwitchHandlerImpl implements SwitchHandler, OpendaylightInventoryLi
 		this.flowManager = flowManager;
 	}
 
-	@Override
-	public void onNodeAppeared(NodeUpdated nodeRef) {
+	public void onNodeMobile(NodeConnector nodeConnector) {
+		//TODO. get MAC addr from nodeConnector and write fwd rules
 	}
 
+	/**
+	 * SwitchHandler
+	 */
 	@Override
-	public void onNodeConnectorRemoved(NodeConnectorRemoved nodeConnectorRemoved) {
-		//do nothing
+	public void onNodeAppeared(NodeUpdated nodeUpdated) {
+		// This event is equivalent to onNodeUpdated
+		flowManager.addInitialFlows((InstanceIdentifier<Node>) nodeUpdated.getNodeRef().getValue());
 	}
 
-	@Override
-	public void onNodeConnectorUpdated(NodeConnectorUpdated nodeConnectorUpdated) {
-		//do nothing
-	}
-
-	@Override
-	public void onNodeRemoved(NodeRemoved nodeRemoved) {
-		//do nothing
-	}
-
-	@Override
-	public void onNodeUpdated(NodeUpdated nodeUpdated) {
-		//switchHandler.onNodeAppeared(nodeUpdated);
+	/**
+	 * @param addrs: addresses added to @param node at the port @param nodeConnector 
+	 */
+	public void onHostMobility(Node node, NodeConnector nodeConnector,
+			Addresses addrs) {
+		// TODO Auto-generated method stub
+		flowManager.writeForwardToMacFlow(node, nodeConnector, addrs);
+		
 	}
 
 }

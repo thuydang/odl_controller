@@ -38,6 +38,8 @@
 
 				<feature.ovsdb.version>1.1.0-SNAPSHOT</feature.ovsdb.version>
 
+				<l2switch.version>0.2.0-SNAPSHOT</l2switch.version>
+
 				<openflow.plugin.version>0.1.0-SNAPSHOT</openflow.plugin.version>
 				<dlux.version>0.2.0-SNAPSHOT</dlux.version>
 

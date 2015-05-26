@@ -46,6 +46,14 @@
 			<type>xml</type>
 		</dependency>
 
+		<dependency>
+			<groupId>org.opendaylight.l2switch</groupId>
+			<artifactId>features-l2switch</artifactId>
+			<version>${l2switch.version}</version>
+			<classifier>features</classifier>
+			<type>xml</type>
+			<scope>runtime</scope>
+		</dependency>
 		<!-- Directly references Features -->
 		<dependency>
 			<groupId>de.dailab.nemo.ima.controller</groupId>

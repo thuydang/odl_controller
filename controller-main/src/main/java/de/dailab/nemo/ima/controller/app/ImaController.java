@@ -24,11 +24,16 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.opendaylight.yangtools.yang.common.RpcError;
 import org.opendaylight.yangtools.yang.common.RpcResult;
 import org.opendaylight.yangtools.yang.common.RpcResultBuilder;
+
 import org.opendaylight.yang.gen.v1.urn.opendaylight.packet.service.rev130709.PacketProcessingService;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.flow.service.rev130819.SalFlowService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.dailab.nemo.ima.controller.app.SwitchManager;
+import de.dailab.nemo.ima.controller.app.FlowWriterService;
+import de.dailab.nemo.ima.controller.app.FlowWriterServiceImpl;
 
 /**
  * This class is initiated when the module is loaded. It holds the basic Config Subsystem Services.
@@ -61,7 +66,7 @@ public class ImaController implements TaskService, AutoCloseable {
     }
 
     public ImaController() {
-
+			// init Object instances only!
 		}
 
     public void start() {
@@ -70,13 +75,17 @@ public class ImaController implements TaskService, AutoCloseable {
 				switchManager.setNotificationService(this.notificationService);
 				switchManager.setDataBroker(this.dataService);
 
-				if (null == rpcService) 
-					log.debug("------ FATAL rpcService is NULL");
-
 				switchManager.setPacketProcessingService(this.rpcService.getRpcService(PacketProcessingService.class));
+				// Flow services
+				SalFlowService salFlowService = this.rpcService.getRpcService(SalFlowService.class);
+				FlowWriterService flowWriterService = new FlowWriterServiceImpl(salFlowService);
+				switchManager.setSalFlowService(salFlowService);
+				switchManager.setFlowWriterService(flowWriterService);
+
+
 				try {
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
+					// TODO never use try-catch w/o really handling exception.  
 					e.printStackTrace();
 				}
  
