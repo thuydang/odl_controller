@@ -1,12 +1,12 @@
 package org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.task;
+import org.opendaylight.yangtools.yang.binding.Augmentation;
+import org.opendaylight.yangtools.yang.binding.AugmentationHolder;
+import org.opendaylight.yangtools.yang.binding.DataObject;
+import java.util.HashMap;
 import org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.EntryId;
+import org.opendaylight.yangtools.concepts.Builder;
 import java.util.Collections;
 import java.util.Map;
-import org.opendaylight.yangtools.yang.binding.DataObject;
-import org.opendaylight.yangtools.yang.binding.AugmentationHolder;
-import java.util.HashMap;
-import org.opendaylight.yangtools.concepts.Builder;
-import org.opendaylight.yangtools.yang.binding.Augmentation;
 
 
 /**

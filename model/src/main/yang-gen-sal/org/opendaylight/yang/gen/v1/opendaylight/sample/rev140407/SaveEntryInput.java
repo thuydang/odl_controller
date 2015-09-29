@@ -1,9 +1,9 @@
 package org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407;
-import org.opendaylight.yangtools.yang.common.QName;
-import org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.saveentry.input.EntryField;
 import org.opendaylight.yangtools.yang.binding.DataObject;
-import org.opendaylight.yangtools.yang.binding.Augmentable;
+import org.opendaylight.yangtools.yang.common.QName;
 import java.util.List;
+import org.opendaylight.yangtools.yang.binding.Augmentable;
+import org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.saveentry.input.EntryField;
 
 
 /**

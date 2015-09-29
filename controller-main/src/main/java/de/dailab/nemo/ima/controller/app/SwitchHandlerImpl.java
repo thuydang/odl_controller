@@ -66,10 +66,6 @@ public class SwitchHandlerImpl implements SwitchHandler {
 		this.flowManager = flowManager;
 	}
 
-	public void onNodeMobile(NodeConnector nodeConnector) {
-		//TODO. get MAC addr from nodeConnector and write fwd rules
-	}
-
 	/**
 	 * SwitchHandler
 	 */

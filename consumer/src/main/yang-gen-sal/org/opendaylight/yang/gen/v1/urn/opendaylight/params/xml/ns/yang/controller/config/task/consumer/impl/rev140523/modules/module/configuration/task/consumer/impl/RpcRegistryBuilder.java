@@ -1,11 +1,11 @@
 package org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl;
-import java.util.Collections;
-import java.util.Map;
-import org.opendaylight.yangtools.yang.binding.DataObject;
+import org.opendaylight.yangtools.yang.binding.Augmentation;
 import org.opendaylight.yangtools.yang.binding.AugmentationHolder;
+import org.opendaylight.yangtools.yang.binding.DataObject;
 import java.util.HashMap;
 import org.opendaylight.yangtools.concepts.Builder;
-import org.opendaylight.yangtools.yang.binding.Augmentation;
+import java.util.Collections;
+import java.util.Map;
 
 
 /**

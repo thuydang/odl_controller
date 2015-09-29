@@ -1,15 +1,15 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1432022957010
-Build-Jdk: 1.7.0_75
-Built-By: fedora
+Bnd-LastModified: 1432732683313
+Build-Jdk: 1.8.0_45
+Built-By: dang
 Bundle-Activator: org.opendaylight.controller.app.web.Activator
 Bundle-ManifestVersion: 2
 Bundle-Name: ima-controller-web
 Bundle-SymbolicName: de.dailab.nemo.ima.controller.ima-controller-web
 Bundle-Version: 1.0.0.SNAPSHOT
 Created-By: Apache Maven Bundle Plugin
-Export-Package: org.opendaylight.controller.app.web;uses:="org.osgi.util
- .tracker,org.osgi.framework,org.osgi.service.http";version="1.0.0.SNAPS
+Export-Package: org.opendaylight.controller.app.web;uses:="org.osgi.fram
+ ework,org.osgi.service.http,org.osgi.util.tracker";version="1.0.0.SNAPS
  HOT"
 Import-Package: org.osgi.framework;version="[1.7,2)",org.osgi.service.ht
  tp;version="[1.2,2)",org.osgi.util.tracker;version="[1.5,2)"
