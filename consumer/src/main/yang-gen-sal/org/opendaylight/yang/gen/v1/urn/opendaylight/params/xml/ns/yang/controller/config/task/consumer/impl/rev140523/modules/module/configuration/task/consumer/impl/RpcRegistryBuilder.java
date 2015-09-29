@@ -1,11 +1,11 @@
 package org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl;
-import org.opendaylight.yangtools.yang.binding.Augmentation;
-import org.opendaylight.yangtools.yang.binding.AugmentationHolder;
-import org.opendaylight.yangtools.yang.binding.DataObject;
-import java.util.HashMap;
-import org.opendaylight.yangtools.concepts.Builder;
 import java.util.Collections;
 import java.util.Map;
+import org.opendaylight.yangtools.yang.binding.DataObject;
+import org.opendaylight.yangtools.yang.binding.AugmentationHolder;
+import java.util.HashMap;
+import org.opendaylight.yangtools.concepts.Builder;
+import org.opendaylight.yangtools.yang.binding.Augmentation;
 
 
 /**
@@ -19,7 +19,7 @@ public class RpcRegistryBuilder implements Builder <org.opendaylight.yang.gen.v1
     private java.lang.Object _name;
     private java.lang.Class<? extends org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.rev130405.ServiceType> _type;
 
-    Map<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl.RpcRegistry>>, Augmentation<org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl.RpcRegistry>> augmentation = new HashMap<>();
+    Map<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl.RpcRegistry>>, Augmentation<org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl.RpcRegistry>> augmentation = Collections.emptyMap();
 
     public RpcRegistryBuilder() {
     }
@@ -33,11 +33,15 @@ public class RpcRegistryBuilder implements Builder <org.opendaylight.yang.gen.v1
         this._type = base.getType();
         if (base instanceof RpcRegistryImpl) {
             RpcRegistryImpl impl = (RpcRegistryImpl) base;
-            this.augmentation = new HashMap<>(impl.augmentation);
+            if (!impl.augmentation.isEmpty()) {
+                this.augmentation = new HashMap<>(impl.augmentation);
+            }
         } else if (base instanceof AugmentationHolder) {
             @SuppressWarnings("unchecked")
             AugmentationHolder<org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl.RpcRegistry> casted =(AugmentationHolder<org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl.RpcRegistry>) base;
-            this.augmentation = new HashMap<>(casted.augmentations());
+            if (!casted.augmentations().isEmpty()) {
+                this.augmentation = new HashMap<>(casted.augmentations());
+            }
         }
     }
 
@@ -95,12 +99,19 @@ public class RpcRegistryBuilder implements Builder <org.opendaylight.yang.gen.v1
         if (augmentation == null) {
             return removeAugmentation(augmentationType);
         }
+    
+        if (!(this.augmentation instanceof HashMap)) {
+            this.augmentation = new HashMap<>();
+        }
+    
         this.augmentation.put(augmentationType, augmentation);
         return this;
     }
     
     public RpcRegistryBuilder removeAugmentation(java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl.RpcRegistry>> augmentationType) {
-        this.augmentation.remove(augmentationType);
+        if (this.augmentation instanceof HashMap) {
+            this.augmentation.remove(augmentationType);
+        }
         return this;
     }
 
@@ -117,7 +128,7 @@ public class RpcRegistryBuilder implements Builder <org.opendaylight.yang.gen.v1
         private final java.lang.Object _name;
         private final java.lang.Class<? extends org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.rev130405.ServiceType> _type;
 
-        private Map<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl.RpcRegistry>>, Augmentation<org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl.RpcRegistry>> augmentation = new HashMap<>();
+        private Map<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl.RpcRegistry>>, Augmentation<org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl.RpcRegistry>> augmentation = Collections.emptyMap();
 
         private RpcRegistryImpl(RpcRegistryBuilder base) {
             this._name = base.getName();
@@ -126,9 +137,9 @@ public class RpcRegistryBuilder implements Builder <org.opendaylight.yang.gen.v1
             case 0:
                 this.augmentation = Collections.emptyMap();
                 break;
-                case 1:
-                    final Map.Entry<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl.RpcRegistry>>, Augmentation<org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl.RpcRegistry>> e = base.augmentation.entrySet().iterator().next();
-                    this.augmentation = Collections.<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl.RpcRegistry>>, Augmentation<org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl.RpcRegistry>>singletonMap(e.getKey(), e.getValue());
+            case 1:
+                final Map.Entry<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl.RpcRegistry>>, Augmentation<org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl.RpcRegistry>> e = base.augmentation.entrySet().iterator().next();
+                this.augmentation = Collections.<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl.RpcRegistry>>, Augmentation<org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523.modules.module.configuration.task.consumer.impl.RpcRegistry>>singletonMap(e.getKey(), e.getValue());
                 break;
             default :
                 this.augmentation = new HashMap<>(base.augmentation);
@@ -154,13 +165,23 @@ public class RpcRegistryBuilder implements Builder <org.opendaylight.yang.gen.v1
             return (E) augmentation.get(augmentationType);
         }
 
+        private int hash = 0;
+        private volatile boolean hashValid = false;
+        
         @Override
         public int hashCode() {
+            if (hashValid) {
+                return hash;
+            }
+        
             final int prime = 31;
             int result = 1;
             result = prime * result + ((_name == null) ? 0 : _name.hashCode());
             result = prime * result + ((_type == null) ? 0 : _type.hashCode());
             result = prime * result + ((augmentation == null) ? 0 : augmentation.hashCode());
+        
+            hash = result;
+            hashValid = true;
             return result;
         }
 

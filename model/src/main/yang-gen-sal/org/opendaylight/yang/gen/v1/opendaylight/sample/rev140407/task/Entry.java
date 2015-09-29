@@ -1,10 +1,10 @@
 package org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.task;
-import org.opendaylight.yangtools.yang.binding.ChildOf;
-import org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task;
-import org.opendaylight.yangtools.yang.common.QName;
 import org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.EntryId;
-import org.opendaylight.yangtools.yang.binding.Augmentable;
+import org.opendaylight.yangtools.yang.common.QName;
+import org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task;
+import org.opendaylight.yangtools.yang.binding.ChildOf;
 import org.opendaylight.yangtools.yang.binding.Identifiable;
+import org.opendaylight.yangtools.yang.binding.Augmentable;
 
 
 /**

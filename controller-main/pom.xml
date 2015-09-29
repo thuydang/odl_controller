@@ -4,12 +4,13 @@
     <parent>
         <artifactId>ima-commons</artifactId>
         <groupId>de.dailab.nemo.ima.controller</groupId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.1.0-SNAPSHOT</version>
 				<relativePath>../commons/parent</relativePath>
     </parent>
 
     <artifactId>ima-controller-main</artifactId>
     <packaging>bundle</packaging>
+		<description>Dependencies for stable Lithium</description>
     <scm>
         <connection>scm:git:ssh://git.opendaylight.org:29418/controller.git</connection>
         <developerConnection>scm:git:ssh://git.opendaylight.org:29418/controller.git</developerConnection>
@@ -21,7 +22,7 @@
 			<dependency>
 				<groupId>de.dailab.nemo.ima.controller</groupId>
 				<artifactId>ima-controller-model</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
+				<version>1.1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.opendaylight.controller</groupId>
@@ -38,6 +39,7 @@
 				<artifactId>sal-binding-api</artifactId>
 				<version>${mdsal.version}</version>
 			</dependency>
+			<!--
 			<dependency>
 				<groupId>org.opendaylight.openflowplugin.model</groupId>
 				<artifactId>model-flow-service</artifactId>
@@ -46,6 +48,7 @@
 				<groupId>org.opendaylight.controller.model</groupId>
 				<artifactId>model-topology</artifactId>
 			</dependency>
+			-->
 			<dependency>
 				<groupId>org.opendaylight.yangtools</groupId>
 				<artifactId>yang-common</artifactId>
@@ -145,7 +148,6 @@
 					<version>${yangtools.version}</version>
 					<executions>
 						<execution>
-							<id>config</id>
 							<goals>
 								<goal>generate-sources</goal>
 							</goals>
@@ -177,7 +179,7 @@
 						<dependency>
 							<groupId>org.opendaylight.controller</groupId>
 							<artifactId>yang-jmx-generator-plugin</artifactId>
-							<version>0.2.5-SNAPSHOT</version>
+							<version>${config.version}</version>
 						</dependency>
 					</dependencies>
 				</plugin>

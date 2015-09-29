@@ -1,6 +1,6 @@
 package org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.task.consumer.impl.rev140523;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.rev130405.ServiceType;
 import org.opendaylight.yangtools.yang.common.QName;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.config.rev130405.ServiceType;
 
 
 /**
@@ -19,6 +19,7 @@ import org.opendaylight.yangtools.yang.common.QName;
 public abstract class TaskConsumerService extends ServiceType
  {
     public static final QName QNAME = org.opendaylight.yangtools.yang.common.QName.cachedReference(org.opendaylight.yangtools.yang.common.QName.create("urn:opendaylight:params:xml:ns:yang:controller:config:task-consumer:impl","2014-05-23","task-consumer-service"));
+
 
     public TaskConsumerService() {
     

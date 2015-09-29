@@ -4,14 +4,15 @@
 	<parent>
 		<groupId>de.dailab.nemo.ima.controller</groupId>
 		<artifactId>ima-commons</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.1.0-SNAPSHOT</version>
 		<relativePath>commons/parent</relativePath>
 	</parent>
 
 	<packaging>pom</packaging>
   <groupId>de.dailab.nemo.ima.controller</groupId>
   <artifactId>ima-controller</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.1.0-SNAPSHOT</version>
+	<description>Dependencies for stable Lithium</description>
 
 	<modules>
 		<module>commons/parent</module>

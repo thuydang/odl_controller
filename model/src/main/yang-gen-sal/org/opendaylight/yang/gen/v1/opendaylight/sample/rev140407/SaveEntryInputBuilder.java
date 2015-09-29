@@ -1,13 +1,13 @@
 package org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407;
-import org.opendaylight.yangtools.yang.binding.Augmentation;
-import org.opendaylight.yangtools.yang.binding.AugmentationHolder;
-import org.opendaylight.yangtools.yang.binding.DataObject;
-import java.util.HashMap;
-import org.opendaylight.yangtools.concepts.Builder;
-import java.util.List;
 import java.util.Collections;
 import java.util.Map;
+import org.opendaylight.yangtools.yang.binding.DataObject;
+import org.opendaylight.yangtools.yang.binding.AugmentationHolder;
+import java.util.HashMap;
 import org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.saveentry.input.EntryField;
+import org.opendaylight.yangtools.concepts.Builder;
+import java.util.List;
+import org.opendaylight.yangtools.yang.binding.Augmentation;
 
 
 /**
@@ -21,7 +21,7 @@ public class SaveEntryInputBuilder implements Builder <org.opendaylight.yang.gen
     private List<EntryField> _entryField;
     private java.lang.String _entryId;
 
-    Map<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput>>, Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput>> augmentation = new HashMap<>();
+    Map<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput>>, Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput>> augmentation = Collections.emptyMap();
 
     public SaveEntryInputBuilder() {
     }
@@ -31,11 +31,15 @@ public class SaveEntryInputBuilder implements Builder <org.opendaylight.yang.gen
         this._entryId = base.getEntryId();
         if (base instanceof SaveEntryInputImpl) {
             SaveEntryInputImpl impl = (SaveEntryInputImpl) base;
-            this.augmentation = new HashMap<>(impl.augmentation);
+            if (!impl.augmentation.isEmpty()) {
+                this.augmentation = new HashMap<>(impl.augmentation);
+            }
         } else if (base instanceof AugmentationHolder) {
             @SuppressWarnings("unchecked")
             AugmentationHolder<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput> casted =(AugmentationHolder<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput>) base;
-            this.augmentation = new HashMap<>(casted.augmentations());
+            if (!casted.augmentations().isEmpty()) {
+                this.augmentation = new HashMap<>(casted.augmentations());
+            }
         }
     }
 
@@ -70,12 +74,19 @@ public class SaveEntryInputBuilder implements Builder <org.opendaylight.yang.gen
         if (augmentation == null) {
             return removeAugmentation(augmentationType);
         }
+    
+        if (!(this.augmentation instanceof HashMap)) {
+            this.augmentation = new HashMap<>();
+        }
+    
         this.augmentation.put(augmentationType, augmentation);
         return this;
     }
     
     public SaveEntryInputBuilder removeAugmentation(java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput>> augmentationType) {
-        this.augmentation.remove(augmentationType);
+        if (this.augmentation instanceof HashMap) {
+            this.augmentation.remove(augmentationType);
+        }
         return this;
     }
 
@@ -92,7 +103,7 @@ public class SaveEntryInputBuilder implements Builder <org.opendaylight.yang.gen
         private final List<EntryField> _entryField;
         private final java.lang.String _entryId;
 
-        private Map<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput>>, Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput>> augmentation = new HashMap<>();
+        private Map<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput>>, Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput>> augmentation = Collections.emptyMap();
 
         private SaveEntryInputImpl(SaveEntryInputBuilder base) {
             this._entryField = base.getEntryField();
@@ -101,9 +112,9 @@ public class SaveEntryInputBuilder implements Builder <org.opendaylight.yang.gen
             case 0:
                 this.augmentation = Collections.emptyMap();
                 break;
-                case 1:
-                    final Map.Entry<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput>>, Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput>> e = base.augmentation.entrySet().iterator().next();
-                    this.augmentation = Collections.<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput>>, Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput>>singletonMap(e.getKey(), e.getValue());
+            case 1:
+                final Map.Entry<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput>>, Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput>> e = base.augmentation.entrySet().iterator().next();
+                this.augmentation = Collections.<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput>>, Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput>>singletonMap(e.getKey(), e.getValue());
                 break;
             default :
                 this.augmentation = new HashMap<>(base.augmentation);
@@ -129,13 +140,23 @@ public class SaveEntryInputBuilder implements Builder <org.opendaylight.yang.gen
             return (E) augmentation.get(augmentationType);
         }
 
+        private int hash = 0;
+        private volatile boolean hashValid = false;
+        
         @Override
         public int hashCode() {
+            if (hashValid) {
+                return hash;
+            }
+        
             final int prime = 31;
             int result = 1;
             result = prime * result + ((_entryField == null) ? 0 : _entryField.hashCode());
             result = prime * result + ((_entryId == null) ? 0 : _entryId.hashCode());
             result = prime * result + ((augmentation == null) ? 0 : augmentation.hashCode());
+        
+            hash = result;
+            hashValid = true;
             return result;
         }
 

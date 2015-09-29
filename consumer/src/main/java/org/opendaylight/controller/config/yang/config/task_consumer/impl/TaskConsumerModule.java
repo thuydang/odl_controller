@@ -50,9 +50,11 @@ public class TaskConsumerModule extends org.opendaylight.controller.config.yang.
         return ret;
     }
 
+		/**
     @Override
     public boolean canReuse(Module m){
         return true;
     }
+		*/
 
 }

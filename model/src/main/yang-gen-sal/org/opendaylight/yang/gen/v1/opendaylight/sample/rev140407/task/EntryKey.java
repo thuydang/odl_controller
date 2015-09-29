@@ -1,12 +1,13 @@
 package org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.task;
-import org.opendaylight.yangtools.yang.binding.Identifier;
 import org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.EntryId;
+import org.opendaylight.yangtools.yang.binding.Identifier;
 
 
 public class EntryKey
  implements Identifier<Entry> {
     private static final long serialVersionUID = -5979597325666883812L;
     private final EntryId _entryId;
+
 
     public EntryKey(EntryId _entryId) {
     

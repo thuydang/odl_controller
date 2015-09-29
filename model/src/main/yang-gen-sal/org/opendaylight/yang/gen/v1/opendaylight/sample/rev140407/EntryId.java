@@ -1,8 +1,8 @@
 package org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407;
-import java.io.Serializable;
-import java.beans.ConstructorProperties;
 import com.google.common.base.Preconditions;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Uri;
+import java.io.Serializable;
+import java.beans.ConstructorProperties;
 
 
 /**
@@ -12,6 +12,7 @@ import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.
 public class EntryId extends Uri
  implements Serializable {
     private static final long serialVersionUID = -5996479465606256162L;
+
 
     @ConstructorProperties("value")
     public EntryId(java.lang.String _value) {

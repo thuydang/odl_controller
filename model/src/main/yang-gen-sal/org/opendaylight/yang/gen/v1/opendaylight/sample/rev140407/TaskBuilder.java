@@ -1,13 +1,13 @@
 package org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407;
-import org.opendaylight.yangtools.yang.binding.Augmentation;
-import org.opendaylight.yangtools.yang.binding.AugmentationHolder;
 import org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.task.Entry;
+import java.util.Collections;
+import java.util.Map;
 import org.opendaylight.yangtools.yang.binding.DataObject;
+import org.opendaylight.yangtools.yang.binding.AugmentationHolder;
 import java.util.HashMap;
 import org.opendaylight.yangtools.concepts.Builder;
 import java.util.List;
-import java.util.Collections;
-import java.util.Map;
+import org.opendaylight.yangtools.yang.binding.Augmentation;
 
 
 /**
@@ -20,7 +20,7 @@ public class TaskBuilder implements Builder <org.opendaylight.yang.gen.v1.openda
 
     private List<Entry> _entry;
 
-    Map<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task>>, Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task>> augmentation = new HashMap<>();
+    Map<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task>>, Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task>> augmentation = Collections.emptyMap();
 
     public TaskBuilder() {
     }
@@ -29,11 +29,15 @@ public class TaskBuilder implements Builder <org.opendaylight.yang.gen.v1.openda
         this._entry = base.getEntry();
         if (base instanceof TaskImpl) {
             TaskImpl impl = (TaskImpl) base;
-            this.augmentation = new HashMap<>(impl.augmentation);
+            if (!impl.augmentation.isEmpty()) {
+                this.augmentation = new HashMap<>(impl.augmentation);
+            }
         } else if (base instanceof AugmentationHolder) {
             @SuppressWarnings("unchecked")
             AugmentationHolder<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task> casted =(AugmentationHolder<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task>) base;
-            this.augmentation = new HashMap<>(casted.augmentations());
+            if (!casted.augmentations().isEmpty()) {
+                this.augmentation = new HashMap<>(casted.augmentations());
+            }
         }
     }
 
@@ -59,12 +63,19 @@ public class TaskBuilder implements Builder <org.opendaylight.yang.gen.v1.openda
         if (augmentation == null) {
             return removeAugmentation(augmentationType);
         }
+    
+        if (!(this.augmentation instanceof HashMap)) {
+            this.augmentation = new HashMap<>();
+        }
+    
         this.augmentation.put(augmentationType, augmentation);
         return this;
     }
     
     public TaskBuilder removeAugmentation(java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task>> augmentationType) {
-        this.augmentation.remove(augmentationType);
+        if (this.augmentation instanceof HashMap) {
+            this.augmentation.remove(augmentationType);
+        }
         return this;
     }
 
@@ -80,7 +91,7 @@ public class TaskBuilder implements Builder <org.opendaylight.yang.gen.v1.openda
 
         private final List<Entry> _entry;
 
-        private Map<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task>>, Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task>> augmentation = new HashMap<>();
+        private Map<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task>>, Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task>> augmentation = Collections.emptyMap();
 
         private TaskImpl(TaskBuilder base) {
             this._entry = base.getEntry();
@@ -88,9 +99,9 @@ public class TaskBuilder implements Builder <org.opendaylight.yang.gen.v1.openda
             case 0:
                 this.augmentation = Collections.emptyMap();
                 break;
-                case 1:
-                    final Map.Entry<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task>>, Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task>> e = base.augmentation.entrySet().iterator().next();
-                    this.augmentation = Collections.<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task>>, Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task>>singletonMap(e.getKey(), e.getValue());
+            case 1:
+                final Map.Entry<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task>>, Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task>> e = base.augmentation.entrySet().iterator().next();
+                this.augmentation = Collections.<java.lang.Class<? extends Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task>>, Augmentation<org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.Task>>singletonMap(e.getKey(), e.getValue());
                 break;
             default :
                 this.augmentation = new HashMap<>(base.augmentation);
@@ -111,12 +122,22 @@ public class TaskBuilder implements Builder <org.opendaylight.yang.gen.v1.openda
             return (E) augmentation.get(augmentationType);
         }
 
+        private int hash = 0;
+        private volatile boolean hashValid = false;
+        
         @Override
         public int hashCode() {
+            if (hashValid) {
+                return hash;
+            }
+        
             final int prime = 31;
             int result = 1;
             result = prime * result + ((_entry == null) ? 0 : _entry.hashCode());
             result = prime * result + ((augmentation == null) ? 0 : augmentation.hashCode());
+        
+            hash = result;
+            hashValid = true;
             return result;
         }
 
