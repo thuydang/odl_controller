@@ -26,5 +26,6 @@
 		<!--
     <module>distribution-karaf</module>
 		-->
+    <module>IMADluxUI</module>
   </modules>
 </project>

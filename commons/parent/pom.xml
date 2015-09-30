@@ -50,7 +50,7 @@
 				<l2switch.version>0.2.2-SNAPSHOT</l2switch.version>
 
 				<openflow.plugin.version>0.1.2-SNAPSHOT</openflow.plugin.version>
-				<dlux.version>0.3.0-SNAPSHOT</dlux.version>
+				<dlux.version>0.2.2-SNAPSHOT</dlux.version>
 
 				<!-- org.opendaylight.controller -->
 				<opendaylight.karaf.empty.version>1.5.2-SNAPSHOT</opendaylight.karaf.empty.version>

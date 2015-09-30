@@ -37,15 +37,21 @@
         <configfile finalname="${config.configfile.directory}/05-task-provider-config.xml">mvn:de.dailab.nemo.ima.controller/${artifactName}-provider/${project.version}/xml/config</configfile>
     </feature>
 		-->
-    <feature name='odl-task-consumer' version='${project.version}'>
-        <feature>ima-controller</feature>
-        <bundle>mvn:de.dailab.nemo.ima.controller/${artifactName}-consumer/${project.version}</bundle>
-        <configfile finalname="${config.configfile.directory}/06-task-consumer-config.xml">mvn:de.dailab.nemo.ima.controller/${artifactName}-consumer/${project.version}/xml/config</configfile>
-    </feature>
-    <feature name='odl-task-web' version='${project.version}'>
-        <feature>http</feature>
-        <feature>ima-controller</feature>
-        <feature version='${mdsal.version}'>odl-restconf-noauth</feature>
-        <bundle>mvn:de.dailab.nemo.ima.controller/${artifactName}-web/${project.version}</bundle>
-    </feature>
+	<feature name='ima-controller-dlux-ui' version='${project.version}' description="IMA UI in Opendaylight dlux">
+		<feature>ima-controller</feature>
+		<feature>odl-dlux-core</feature>
+		<bundle>mvn:de.dailab.nemo.ima.controller/IMADluxUI-bundle/${project.version}</bundle>
+	</feature>
+
+	<feature name='odl-task-consumer' version='${project.version}'>
+		<feature>ima-controller</feature>
+		<bundle>mvn:de.dailab.nemo.ima.controller/${artifactName}-consumer/${project.version}</bundle>
+		<configfile finalname="${config.configfile.directory}/06-task-consumer-config.xml">mvn:de.dailab.nemo.ima.controller/${artifactName}-consumer/${project.version}/xml/config</configfile>
+	</feature>
+	<feature name='odl-task-web' version='${project.version}'>
+		<feature>http</feature>
+		<feature>ima-controller</feature>
+		<feature version='${mdsal.version}'>odl-restconf-noauth</feature>
+		<bundle>mvn:de.dailab.nemo.ima.controller/${artifactName}-web/${project.version}</bundle>
+	</feature>
 </features>
