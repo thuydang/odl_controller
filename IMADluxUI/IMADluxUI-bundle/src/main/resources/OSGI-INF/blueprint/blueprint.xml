@@ -1,19 +1,21 @@
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
-    <reference id="httpService" availability="mandatory" activation="eager" interface="org.osgi.service.http.HttpService"/>
-    <reference id="loader" availability="mandatory" activation="eager" interface="org.opendaylight.dlux.loader.DluxModuleLoader"/>
+	<reference id="httpService" availability="mandatory" activation="eager" interface="org.osgi.service.http.HttpService"/>
+	<reference id="loader" availability="mandatory" activation="eager" interface="org.opendaylight.dlux.loader.DluxModuleLoader"/>
 
-    <bean id="bundle" init-method="initialize" destroy-method="clean" class="org.opendaylight.dlux.loader.DluxModule">
-        <property name="httpService" ref="httpService"/>
-        <property name="loader" ref="loader"/>
-        <property name="moduleName" value="IMADluxUI"/>
-        <property name="url" value="/src/app/IMADluxUI"/>
-        <property name="directory" value="/IMADluxUI"/>
-        <property name="requireJs" value="app/IMADluxUI/IMADluxUI.module"/>
-        <property name="angularJs" value="app.IMADluxUI"/>
-        <property name="cssDependencies">
-            <list>
-                <value>src/app/IMADluxUI/IMADluxUI-custom.css</value>
-            </list>
-        </property>
-    </bean>
+	<bean id="bundle" init-method="initialize" destroy-method="clean" class="org.opendaylight.dlux.loader.DluxModule">
+		<property name="httpService" ref="httpService"/>
+		<property name="loader" ref="loader"/>
+		<property name="moduleName" value="IMADluxUI"/>
+		<property name="url" value="/src/app/IMADluxUI"/>
+		<property name="directory" value="/IMADluxUI"/>
+		<!-- Main requireJs module facade where requireJs deps for this module are defined -->
+		<property name="requireJs" value="app/IMADluxUI/IMADluxUI.module"/>
+		<!-- Name of AngularJs module, returned from the requireJs facade -->
+		<property name="angularJs" value="app.IMADluxUI"/>
+		<property name="cssDependencies">
+			<list>
+				<value>src/app/IMADluxUI/assets/css/IMADluxUI-custom.css</value>
+			</list>
+		</property>
+	</bean>
 </blueprint>

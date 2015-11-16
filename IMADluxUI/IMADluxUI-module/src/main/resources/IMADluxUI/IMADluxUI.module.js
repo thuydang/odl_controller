@@ -6,8 +6,8 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
 
-define(['angularAMD', 'app/routingConfig', 'app/core/core.services', 'common/config/env.module'], function(ng) {
-  var IMADluxUIApp = angular.module('app.IMADluxUI', ['app.core', 'ui.router.state','config']);
+define(['angularAMD', 'app/routingConfig', 'app/core/core.services', 'Restangular', 'ocLazyLoad', 'common/config/env.module'], function(ng) {
+  var IMADluxUIApp = angular.module('app.IMADluxUI', ['app.core', 'ui.router.state','restangular', 'oc.lazyLoad', 'config']);
 
   IMADluxUIApp.config(function($stateProvider, $compileProvider, $controllerProvider, $provide, NavHelperProvider, $translateProvider) {
 		// If your module is required by the main application, you will need to register your 
@@ -27,14 +27,15 @@ define(['angularAMD', 'app/routingConfig', 'app/core/core.services', 'common/con
 		// parameter in the configuration method. This helper has a method to easily append contain 
 		// into the menu. The first parameter is 
 		// an id who refer as the level of your menu and the second is a object. 
-    NavHelperProvider.addControllerUrl('app/IMADluxUI/IMADluxUI.controller');
+    //NavHelperProvider.addControllerUrl('app/IMADluxUI/IMADluxUI.controller');
+    NavHelperProvider.addControllerUrl('app/IMADluxUI/components/topology/topologyController');
     NavHelperProvider.addToMenu('IMADluxUI', {
      "link" : "#/IMADluxUI",
      "active" : "main.IMADluxUI",
      "title" : "IMA Controller UI",
      "icon" : "",  // Add navigation icon css class here
      "page" : {
-        "title" : "IMADluxUI",
+        "title" : "IMA Topology",
         "description" : "IMADluxUI"
      }
     });
@@ -48,13 +49,63 @@ define(['angularAMD', 'app/routingConfig', 'app/core/core.services', 'common/con
         access: access.admin,
         views : {
             'content' : {
-                templateUrl: 'src/app/IMADluxUI/IMADluxUI.tpl.html',
-                controller: 'IMADluxUICtrl'
+                //templateUrl: 'src/app/IMADluxUI/module.index.html',
+                templateUrl: 'src/app/IMADluxUI/components/topology/topology.html',
+                //controller: 'IMADluxUICtrl'
+                controller: 'TopologyController'
             }
-        }
-    });
+        },
+				resolve: {
+					/*
+					loadMyFile:['$ocLazyLoad', function( $ocLazyLoad ) {
+						return $ocLazyLoad.load({
+							name:'topology_ima',
+							files:[
+								'src/app/IMADluxUI/assets/libs/next-ui/js/next.js',
+								'src/app/IMADluxUI/assets/libs/next-ui/css/next.css',
+							]
+						}).then(function success(args) {
+							console.log('success');
+							return args;
+						}, function error(err) {
+							console.log(err);
+							return err;
+						});
+					}],
+					*/
+					loadNextUI:['$ocLazyLoad', function( $ocLazyLoad ) {
+						return $ocLazyLoad.load({
+							//name:'nextUI',
+							files:[
+								'src/app/IMADluxUI/assets/libs/next-ui/js/next.js',
+								'src/app/IMADluxUI/assets/libs/next-ui/css/next.css',
+							]
+						}).then(function success(args) {
+							console.log('success');
+							return args;
+						}, function error(err) {
+							console.log(err);
+							return err;
+						});
+					}],
+					loadNextUIModule:['$ocLazyLoad', 'loadNextUI', function( $ocLazyLoad ) {
+						return $ocLazyLoad.load({
+							files:[
+								'src/app/IMADluxUI/components/topology/next-modules/data.js',
+								'src/app/IMADluxUI/components/topology/next-modules/topology.js',
+							]
+						}).then(function success(args) {
+							console.log('success');
+							return args;
+						}, function error(err) {
+							console.log(err);
+							return err;
+						});
+					}]
+				}
+		});
 
-  });
+	});
 
-  return IMADluxUIApp;
+	return IMADluxUIApp;
 });
