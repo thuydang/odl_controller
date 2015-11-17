@@ -4,10 +4,14 @@ var topologyData = {};
 var odl2next = function (data) {
 	// create alias
 	var topology = data.topology[0];
-	//var topology = data.topology[0];
+	//console.log(topology.node);
+	//console.log(typeof topology.node !== 'undefined'
+	//		    ? topology.node.length : 'data is null or undefined.');
+	
 	// prepare stub for results
 	var topologyResult = {nodes: [], links: []};
 	// process nodes
+	if (typeof topology.node !== 'undefined'){
 	for (var i = 0; i < topology.node.length; i++) {
 		var node = {};
 		// node name
@@ -18,15 +22,18 @@ var odl2next = function (data) {
 		// add the node to the result object
 		topologyResult.nodes.push(node);
 	}
+	}
 	// processing links
+	if (typeof topology.link !== 'undefined'){
 	for (i = 0; i < topology.link.length; i++) {
 		var link = {
-			id: i,
+			id: topology.link[i]['link-id'],
 			source: topology.link[i].source['source-node'],
 			target: topology.link[i].destination['dest-node']
 		};
 		// add the link to the result object
 		topologyResult.links.push(link);
+	}
 	}
 	return topologyResult;
 };

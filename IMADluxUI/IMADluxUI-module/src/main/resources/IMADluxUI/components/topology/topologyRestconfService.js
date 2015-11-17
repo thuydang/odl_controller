@@ -21,17 +21,17 @@ define(['app/IMADluxUI/IMADluxUI.module'],function(IMADluxUIApp) {
 	}]);
 	*/
 
-	IMADluxUIApp.register.factory('TopologyRestangular', function(Restangular, ENV) {
+	IMADluxUIApp.register.factory('ImaTopologyRestangular', function(Restangular, ENV) {
 		return Restangular.withConfig(function(RestangularConfig) {
 			RestangularConfig.setBaseUrl(ENV.getBaseURL("MD_SAL"));
 			//RestangularConfig.setBaseUrl('app/IMADluxUI/assets/data/flow-1.json');
 		});
 	});
 
-	IMADluxUIApp.register.factory('NetworkTopologySvc', function(TopologyRestangular) {
+	IMADluxUIApp.register.factory('ImaTopologySvc', function(ImaTopologyRestangular) {
 		var svc = {
 			base: function() {
-				return TopologyRestangular.one('restconf').one('operational').one('network-topology:network-topology');
+				return ImaTopologyRestangular.one('restconf').one('operational').one('network-topology:network-topology');
 			},
 			test: function() {
 				svc.data = svc.base().one("topology","flow:1").get();
@@ -62,11 +62,83 @@ define(['app/IMADluxUI/IMADluxUI.module'],function(IMADluxUIApp) {
 			return svc.test();
 		};
 
+		getData: function() {
+			svc.data = svc.base().one("topology","flow:1").get();
+			return svc.data;
+		},
+
 		svc.getNode = function(node,cb) {
 			return;
 		};
 
 		return svc;
+	});
+
+	/*
+	 *	Websocket Service
+	 */
+	IMADluxUIApp.register.factory('OdlWebsocketSvc', function(ImaTopologyRestangular, $q, $rootScope, ENV) {
+		    // We return this object to anything injecting our service
+    var svc = {};
+    // Keep all pending requests here until they get responses
+    var callbacks = {};
+    // Create a unique callback ID to map requests to responses
+    var currentCallbackId = 0;
+    // Create our websocket object with the address to the websocket
+    var ws = new WebSocket("ws://localhost:8000/socket/");
+    
+    ws.onopen = function(){  
+        console.log("Socket has been opened!");  
+    };
+    
+    ws.onmessage = function(message) {
+        listener(JSON.parse(message.data));
+    };
+
+    function sendRequest(request) {
+      var defer = $q.defer();
+      var callbackId = getCallbackId();
+      callbacks[callbackId] = {
+        time: new Date(),
+        cb:defer
+      };
+      request.callback_id = callbackId;
+      console.log('Sending request', request);
+      ws.send(JSON.stringify(request));
+      return defer.promise;
+    }
+
+    function listener(data) {
+      var messageObj = data;
+      console.log("Received data from websocket: ", messageObj);
+      // If an object exists with callback_id in our callbacks object, resolve it
+      if(callbacks.hasOwnProperty(messageObj.callback_id)) {
+        console.log(callbacks[messageObj.callback_id]);
+        $rootScope.$apply(callbacks[messageObj.callback_id].cb.resolve(messageObj.data));
+        delete callbacks[messageObj.callbackID];
+      }
+    }
+    // This creates a new callback ID for a request
+    function getCallbackId() {
+      currentCallbackId += 1;
+      if(currentCallbackId > 10000) {
+        currentCallbackId = 0;
+      }
+      return currentCallbackId;
+    }
+
+    // Define a "getter" for getting customer data
+    svc.getCustomers = function() {
+      var request = {
+        type: "get_customers"
+      }
+      // Storing in a variable for clarity on what sendRequest returns
+      var promise = sendRequest(request); 
+      return promise;
+    }
+
+    return svc;
+
 	});
 
 });

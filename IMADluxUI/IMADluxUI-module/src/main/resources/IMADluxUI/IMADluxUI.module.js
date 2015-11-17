@@ -33,7 +33,7 @@ define(['angularAMD', 'app/routingConfig', 'app/core/core.services', 'Restangula
      "link" : "#/IMADluxUI",
      "active" : "main.IMADluxUI",
      "title" : "IMA Controller UI",
-     "icon" : "",  // Add navigation icon css class here
+     "icon" : "icon-link",  // Add navigation icon css class here
      "page" : {
         "title" : "IMA Topology",
         "description" : "IMADluxUI"
@@ -77,8 +77,8 @@ define(['angularAMD', 'app/routingConfig', 'app/core/core.services', 'Restangula
 						return $ocLazyLoad.load({
 							//name:'nextUI',
 							files:[
-								'src/app/IMADluxUI/assets/libs/next-ui/js/next.js',
 								'src/app/IMADluxUI/assets/libs/next-ui/css/next.css',
+								'src/app/IMADluxUI/assets/libs/next-ui/js/next.js',
 							]
 						}).then(function success(args) {
 							console.log('success');

@@ -15,8 +15,11 @@ define([
 			//		.controller('TopologyController', ['$scope', '$timeout', 'TopologyService',
 			//			function ($scope, $timeout, TopologyService) {
 
-			IMADluxUIApp.register.controller('TopologyController', ['$scope', '$rootScope', 'NetworkTopologySvc', function($scope, $rootScope, NetworkTopologySvc) {
+			IMADluxUIApp.register.controller('TopologyController', ['$scope', '$rootScope', 'ImaTopologySvc', function($scope, $rootScope, ImaTopologySvc) {
 
+				/**
+				 *	Topology with NeXt UI Application
+				 */
 				// create NeXt Application. NOTE: nx is not angluar service hence can't be in dependency list. Just use it here.
 				// initialize a new application instance
 				var app = new nx.ui.Application();
@@ -37,9 +40,9 @@ define([
 
 				// get topology data using TopologyService, which return a promise
 				//test: $scope.topology = TopologyService.query();
-				NetworkTopologySvc.getTestData()
+				ImaTopologySvc.getData()
 					.then(function (data) {
-						test: $scope.topology = data;
+						$scope.topology = data;
 						// process ODL topology's JSON to turn it to next json
 						topologyData = odl2next(data);
 						// feed topology object with nodes and links...
@@ -47,7 +50,15 @@ define([
 						topology.fit();
 						topology.adaptToContainer(); 
 					});
+				/*--*/
 
+				/**
+				 *	Handle Websocket for Topology Update
+				 */
+
+				/*--*/
+
+				/*
 				$scope.line = {
 					labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
 					series: ['Series A', 'Series B'],
@@ -59,7 +70,7 @@ define([
 						console.log(points, evt);
 					}
 				};
-
+				*/
 
 			}]);
 		});
