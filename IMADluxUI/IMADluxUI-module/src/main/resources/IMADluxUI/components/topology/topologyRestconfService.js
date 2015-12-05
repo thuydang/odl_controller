@@ -79,7 +79,40 @@ define(['app/IMADluxUI/IMADluxUI.module'],function(IMADluxUIApp) {
 	 */
 	IMADluxUIApp.register.factory('OdlWebsocketSvc', function(ImaTopologyRestangular, $q, $rootScope, ENV) {
 		    // We return this object to anything injecting our service
-    var svc = {};
+		var svc = {
+			createOldStream: function() {
+				ImaTopologyRestangular.customPOST(
+						JSON.stringify(
+							{
+								'input': {
+									'path': '/toaster:toaster/toaster:toasterStatus',
+									'sal-remote-augment:datastore': 'OPERATIONAL',
+									'sal-remote-augment:scope': 'ONE'
+								}
+							}
+							), // body
+						'restconf/operations/sal-remote:create-data-change-event-subscription', // path
+						{}, // custom param
+						{Content-Type=application/xml, Accept=application/xml} // custom header
+						);
+			},
+			subscribeStream: function() {
+				return svc.data;
+			},
+			createWebsocket: function(wsUrl) {
+				svc.ws = new WebSocket(wsUrl);
+				svc.ws.onopen = function(){  
+					console.log("Socket has been opened!");  
+				};
+			},
+			notificationListener: function() {
+				return svc.data;
+			},
+			ws: null
+		
+		};
+
+		/*
     // Keep all pending requests here until they get responses
     var callbacks = {};
     // Create a unique callback ID to map requests to responses
@@ -136,7 +169,7 @@ define(['app/IMADluxUI/IMADluxUI.module'],function(IMADluxUIApp) {
       var promise = sendRequest(request); 
       return promise;
     }
-
+		*/
     return svc;
 
 	});
