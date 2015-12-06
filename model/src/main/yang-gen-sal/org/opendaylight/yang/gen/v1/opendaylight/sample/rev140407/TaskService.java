@@ -1,7 +1,7 @@
 package org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407;
-import java.util.concurrent.Future;
 import org.opendaylight.yangtools.yang.binding.RpcService;
 import org.opendaylight.yangtools.yang.common.RpcResult;
+import java.util.concurrent.Future;
 
 
 /**

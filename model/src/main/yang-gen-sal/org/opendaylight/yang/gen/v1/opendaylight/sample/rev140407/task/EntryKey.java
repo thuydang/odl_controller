@@ -1,6 +1,6 @@
 package org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.task;
-import org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.EntryId;
 import org.opendaylight.yangtools.yang.binding.Identifier;
+import org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.EntryId;
 
 
 public class EntryKey

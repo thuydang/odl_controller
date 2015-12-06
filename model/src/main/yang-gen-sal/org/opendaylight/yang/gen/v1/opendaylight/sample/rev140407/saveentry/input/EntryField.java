@@ -1,7 +1,7 @@
 package org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.saveentry.input;
-import org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput;
-import org.opendaylight.yangtools.yang.common.QName;
 import org.opendaylight.yangtools.yang.binding.ChildOf;
+import org.opendaylight.yangtools.yang.common.QName;
+import org.opendaylight.yang.gen.v1.opendaylight.sample.rev140407.SaveEntryInput;
 import org.opendaylight.yangtools.yang.binding.Augmentable;
 
 
