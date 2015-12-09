@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1449403699648
-Build-Jdk: 1.8.0_60
-Built-By: ubuntu
+Bnd-LastModified: 1449662947594
+Build-Jdk: 1.8.0_65
+Built-By: dang
 Bundle-Activator: org.opendaylight.controller.app.web.Activator
 Bundle-Description: Dependencies for stable Lithium
 Bundle-ManifestVersion: 2

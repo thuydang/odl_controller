@@ -23,6 +23,8 @@
         <java.version.source>1.7</java.version.source>
         <java.version.target>1.7</java.version.target>
         <maven.compile.plugin.version>2.5.1</maven.compile.plugin.version>
+				<!--
+				-->
         <mdsal.version>1.2.2-SNAPSHOT</mdsal.version>
         <equinox.osgi.version>3.8.1.v20120830-144521</equinox.osgi.version>
 				<!--
@@ -39,7 +41,10 @@
         <salGeneratorPath>src/main/yang-gen-sal</salGeneratorPath>
 
 				<!-- karaf prop -->
-        <config.version>0.3.2-SNAPSHOT</config.version> <!-- controller/opendaylight/config/ -->
+				<!-- 
+						 -->
+				<!-- controller/opendaylight/config/ -->
+        <config.version>0.3.2-SNAPSHOT</config.version> 
         <config.configfile.directory>etc/opendaylight/karaf</config.configfile.directory>
 				<config.controller-main.configfile>58-controllermain.xml</config.controller-main.configfile>
         <osgi.compendium.version>5.0.0</osgi.compendium.version>

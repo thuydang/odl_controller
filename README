@@ -1,0 +1,5 @@
+= Dev environment =
+JAVA 1.8 require maven > 3.3.3
+Possible issue: unresolvable artifacts
+
+= =
